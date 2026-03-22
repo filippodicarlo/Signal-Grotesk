@@ -19,7 +19,7 @@
   --font-ui: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* ─── RESET ─── */
+/* ─── Reset ─── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -63,14 +63,20 @@ strong {
   z-index: 10;
 }
 
-.nav-left,
+.nav-left, 
+.nav-center,
 .nav-right {
   font-family: var(--font-ui);
-  font-size: 13px;
+  font-size: clamp(10px, 1vw, 13px);
   font-weight: 400;
   letter-spacing: 4px;
   color: var(--black);
+  flex: 1;    
 }
+
+.nav-left { justify-content: flex-start; }
+.nav-center { justify-content: center; text-align: center; }
+.nav-right { justify-content: flex-end; text-align: right; }
 
 .nav-link {
   color: var(--black);
@@ -104,18 +110,19 @@ strong {
 .hero::after {
   content: '';
   position: absolute;
-  background: rgba(0, 0, 0, 0.07);
+  background: var(--red);
+  opacity: 0.4;    
   pointer-events: none;
   z-index: 1;
 }
 .hero::before {
-  width: 1px;
+  width: 2px;
   top: 0;
   bottom: 0;
   left: var(--mx, 50%);
 }
 .hero::after {
-  height: 1px;
+  height: 2px;
   left: 0;
   right: 0;
   top: var(--my, 50%);
