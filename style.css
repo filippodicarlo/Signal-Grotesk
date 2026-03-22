@@ -53,7 +53,7 @@ strong {
 
 /* ─── Nav ─── */
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -61,6 +61,10 @@ strong {
   justify-content: space-between;
   padding: 14px 20px;
   z-index: 10;
+  background-color: #f8f4ed33;
+  border-bottom: 1px solid var(--red);    
+  backdrop-filter: blur(8px); /* Sfoca lo sfondo sotto la navbar */
+  -webkit-backdrop-filter: blur(8px); /* Per compatibilità Safari */    
 }
 
 .nav-left, 
@@ -111,18 +115,18 @@ strong {
   content: '';
   position: absolute;
   background: var(--red);
-  opacity: 0.4;    
+  opacity: 1;    
   pointer-events: none;
   z-index: 1;
 }
 .hero::before {
-  width: 2px;
+  width: 1px;
   top: 0;
   bottom: 0;
   left: var(--mx, 50%);
 }
 .hero::after {
-  height: 2px;
+  height: 1px;
   left: 0;
   right: 0;
   top: var(--my, 50%);
