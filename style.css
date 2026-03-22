@@ -1,9 +1,9 @@
 
 
 @font-face {
-  font-family: 'SignalGrotesk';
-  src: url('SignalGrotesk.woff2') format('woff2'),
-       url('SignalGrotesk.ttf') format('truetype');
+  font-family: 'SignalGroteskVF';
+  src: url('SignalGroteskVF.woff2') format('woff2'),
+       url('SignalGroteskVF.ttf') format('truetype');
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
   --white:  #f8f4ed;
   --black:  #191815;
   --muted:  #7a7671;
-  --font-sg: 'SignalGrotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-sg: 'SignalGroteskVF', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-ui: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -63,8 +63,8 @@ strong {
   z-index: 10;
   background-color: #f8f4ed33;
   border-bottom: 1px solid var(--red);    
-  backdrop-filter: blur(8px); /* Sfoca lo sfondo sotto la navbar */
-  -webkit-backdrop-filter: blur(8px); /* Per compatibilità Safari */    
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px);   
 }
 
 .nav-left, 
