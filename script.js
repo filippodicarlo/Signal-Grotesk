@@ -1,118 +1,143 @@
+/**
+ * SIGNAL GROTESK - VARIABLE FONT CONTROLLER
+ * Axes: Weight (300-700), x-height (400-600)
+ */
 
 const WGHT_MIN = 300;
 const WGHT_MAX = 700;
 const XHGT_MIN = 400;
 const XHGT_MAX = 600;
 
+// Elementi DOM
+const hero       = document.getElementById('hero');
 const heroTitle  = document.getElementById('heroTitle');
 const wghtVal    = document.getElementById('wghtVal');
 const xhgtVal    = document.getElementById('xhgtVal');
-const hero       = document.getElementById('hero');
+const navEl      = document.querySelector('.nav');
+const navLinks   = document.querySelectorAll('.nav-link');
 
+// Stato assi (Default: Regular 400, 450)
 let currentWght = 400;
-let currentXhgt = 500;
+let currentXhgt = 450;
 let targetWght  = 400;
-let targetXhgt  = 500;
+let targetXhgt  = 450;
 let animating   = false;
 
-
-hero.addEventListener('mousemove', (e) => {
+/**
+ * LOGICA DI MOVIMENTO (Mouse & Touch)
+ */
+function handleInteraction(clientX, clientY) {
   const rect = hero.getBoundingClientRect();
 
+  // Calcolo ratio (0 a 1) con clamp per evitare valori fuori range
+  const xRatio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  const yRatio = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
 
-  const xRatio = (e.clientX - rect.left) / rect.width;
+  // Mappa i ratio agli assi del font
   targetWght = Math.round(WGHT_MIN + xRatio * (WGHT_MAX - WGHT_MIN));
-
-
-  const yRatio = (e.clientY - rect.top) / rect.height;
   targetXhgt = Math.round(XHGT_MAX - yRatio * (XHGT_MAX - XHGT_MIN));
 
-
-  hero.style.setProperty('--mx', e.clientX - rect.left + 'px');
-  hero.style.setProperty('--my', e.clientY - rect.top + 'px');
+  // Aggiorna variabili CSS per la croce (solo desktop)
+  hero.style.setProperty('--mx', (clientX - rect.left) + 'px');
+  hero.style.setProperty('--my', (clientY - rect.top) + 'px');
 
   if (!animating) {
     animating = true;
-    smoothUpdate();
+    requestAnimationFrame(smoothUpdate);
   }
-});
-
+}
 
 function smoothUpdate() {
   const lerpFactor = 0.12;
 
+  // Fluidità del movimento (Lerp)
   currentWght += (targetWght - currentWght) * lerpFactor;
   currentXhgt += (targetXhgt - currentXhgt) * lerpFactor;
 
   const wght = Math.round(currentWght);
   const xhgt = Math.round(currentXhgt);
 
+  // Applica al font e ai counter
   heroTitle.style.fontVariationSettings = `'wght' ${wght}, 'XHGT' ${xhgt}`;
   wghtVal.textContent = wght;
   xhgtVal.textContent = xhgt;
 
-  const stillMoving = Math.abs(targetWght - currentWght) > 0.5
-                   || Math.abs(targetXhgt - currentXhgt) > 0.5;
+  const delta = Math.abs(targetWght - currentWght) + Math.abs(targetXhgt - currentXhgt);
 
-  if (stillMoving) {
+  if (delta > 0.1) {
     requestAnimationFrame(smoothUpdate);
   } else {
     animating = false;
   }
 }
 
-
-hero.addEventListener('mouseleave', () => {
+function resetToDefault() {
   targetWght = 400;
-  targetXhgt = 500;
+  targetXhgt = 450;
   if (!animating) {
     animating = true;
-    smoothUpdate();
+    requestAnimationFrame(smoothUpdate);
   }
-});
+}
+
+// Event Listeners Desktop
+hero.addEventListener('mousemove', (e) => handleInteraction(e.clientX, e.clientY));
+hero.addEventListener('mouseleave', resetToDefault);
+
+// Event Listeners Mobile (Touch)
+hero.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 0) {
+    // Impedisce lo scroll mentre si interagisce con la Hero
+    if (e.cancelable) e.preventDefault(); 
+    handleInteraction(e.touches[0].clientX, e.touches[0].clientY);
+  }
+}, { passive: false });
+
+hero.addEventListener('touchend', resetToDefault);
 
 
-const navEl = document.querySelector('nav');
-const navLinks = document.querySelectorAll('nav ul a');
+/**
+ * INTERSECTION OBSERVER (Nav color & Reveals)
+ */
+
+// Cambio colore Nav quando esce dalla Hero
 const heroObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navEl.style.color = 'var(--fg-light)';
-      navLinks.forEach(l => l.style.color = 'var(--fg-light)');
-      document.querySelector('.nav-logo').style.color = 'var(--fg-light)';
+    // Se la hero NON è visibile, la nav diventa scura (testo bianco su bg nero)
+    if (!entry.isIntersecting) {
+      navEl.style.backgroundColor = 'var(--black)';
+      navEl.style.borderBottomColor = 'var(--muted)';
+      navLinks.forEach(l => l.style.color = 'var(--white)');
+      document.querySelector('.nav-center').style.color = 'var(--white)';
+      document.querySelector('.nav-right').style.color = 'var(--white)';
+      document.querySelector('.nav-logo-img').style.filter = 'brightness(1) invert(1)';
     } else {
-      navEl.style.color = 'var(--fg-dark)';
-      navLinks.forEach(l => l.style.color = 'var(--fg-dark)');
-      document.querySelector('.nav-logo').style.color = 'var(--fg-dark)';
+      // Setup originale (chiaro)
+      navEl.style.backgroundColor = '#f8f4ed33';
+      navEl.style.borderBottomColor = 'var(--red)';
+      navLinks.forEach(l => l.style.color = 'var(--black)');
+      document.querySelector('.nav-center').style.color = 'var(--black)';
+      document.querySelector('.nav-right').style.color = 'var(--black)';
+      document.querySelector('.nav-logo-img').style.filter = 'brightness(0)';
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.1 });
 
 heroObserver.observe(hero);
 
-
+// Reveal delle sezioni allo scroll
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.1 });
 
-document.querySelectorAll(
-  '.size-row, .weight-row, .use-card, .statement-line, .license-row'
-).forEach(el => {
-  el.classList.add('reveal');
+document.querySelectorAll('.section-text, .character-section, .weights-section, .sample-section, .feature-section, .download-section').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'all 0.8s ease-out';
   revealObserver.observe(el);
 });
-
-
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(sec => {
-    if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
-  });
-  navLinks.forEach(link => {
-    const isActive = link.getAttribute('href') === `#${current}`;
-    link.style.opacity = isActive ? '1' : '';
-  });
-}, { passive: true });
