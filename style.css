@@ -140,7 +140,7 @@ strong {
   line-height: 1;
   text-align: center;
   color: var(--black);
-  font-variation-settings: 'wght' 400, 'XHGT' 500;
+  font-variation-settings: 'wght' 400, 'XHGT' 450;
   user-select: none;
   position: relative;
   z-index: 2;
@@ -231,7 +231,7 @@ strong {
 .character-set {
   font-family: var(--font-sg);
   font-size: clamp(1.5rem, 4.4vw, 5rem);
-  font-variation-settings: 'wght' 400, 'XHGT' 500;
+  font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   text-align: justify;
   line-height: 1.5;
@@ -282,7 +282,7 @@ strong {
 .sample-label {
   font-family: var(--font-sg);
   font-size: clamp(1.5rem, 4.4vw, 5rem);
-  font-variation-settings: 'wght' 400, 'XHGT' 500;
+  font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   margin-bottom: 2vw;
   letter-spacing: 0.05em;
@@ -291,7 +291,7 @@ strong {
 .sample-text {
   font-family: var(--font-sg);
   font-size: clamp(14px, 1.5vw, 50px);
-  font-variation-settings: 'wght' 400, 'XHGT' 500;
+  font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   text-align: justify;
   line-height: 1.65;
@@ -328,7 +328,7 @@ strong {
 .download-label {
   font-family: var(--font-sg);
   font-size: clamp(1.5rem, 4.4vw, 5rem);
-  font-variation-settings: 'wght' 400, 'XHGT' 500;
+  font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   margin-bottom: 2vw;
   letter-spacing: 0.05em;
