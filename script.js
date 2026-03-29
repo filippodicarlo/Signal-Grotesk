@@ -14,9 +14,9 @@ const navLinks   = document.querySelectorAll('.nav-link');
 
 
 let currentWght = 400;
-let currentXhgt = 450;
+let currentXhgt = 500;
 let targetWght  = 400;
-let targetXhgt  = 450;
+let targetXhgt  = 500;
 let animating   = false;
 
 
@@ -66,7 +66,7 @@ function smoothUpdate() {
 
 function resetToDefault() {
   targetWght = 400;
-  targetXhgt = 450;
+  targetXhgt = 500;
   if (!animating) {
     animating = true;
     requestAnimationFrame(smoothUpdate);
