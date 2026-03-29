@@ -290,7 +290,7 @@ strong {
 
 .sample-text {
   font-family: var(--font-sg);
-  font-size: clamp(14px, 1.7vw, 22px);
+  font-size: clamp(14px, 1.5vw, 50px);
   font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   text-align: justify;
