@@ -134,12 +134,15 @@ strong {
 
 .hero-title {
   font-family: var(--font-sg);
-  font-size: 14vw;
+  font-size: clamp(2rem, 12vw, 14vw);
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
   text-align: center;
   color: var(--black);
+  white-space: nowrap;
+  max-width: 95vw;
+  overflow: hidden;    
   font-variation-settings: 'wght' 400, 'XHGT' 450;
   user-select: none;
   position: relative;
@@ -403,7 +406,7 @@ strong {
 @media (max-width: 768px) {
   .hero { cursor: auto; }
   .hero::before, .hero::after { display: none; }
-  .hero-title { font-size: 18vw; }
+  .hero-title { font-size: 12vw; }
 
   .section-text,
   .character-section,
