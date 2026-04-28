@@ -241,40 +241,41 @@ strong {
   letter-spacing: 0.05em;
 }
 
-/* ─── Pesi font ─── */
-.weights-section {
-  padding: 4vw 15vw;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
 
-.weight-item {
-  font-family: var(--font-sg);
-  font-size: clamp(2rem, 5vw, 5rem);
-  letter-spacing: 0.01em;
-  line-height: 1.2;
-  color: var(--white);
+/* ─── Specimen rows ─── */
+.specimen-section {
+  padding: 0 15vw;
+}
+ 
+.spec-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5vw 0 1vw;
+}
+ 
+.spec-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+ 
+.spec-meta {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 1.5vw 0;
+  margin-bottom: 0.2em;
 }
-
-.weight-item:last-child {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.weight-tag {
+ 
+.spec-size,
+.spec-weight {
   font-family: var(--font-ui);
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  letter-spacing: 2px;
   color: var(--muted);
-  flex-shrink: 0;
-  margin-left: 2rem;
+}
+ 
+.spec-text {
+  font-family: var(--font-sg);
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 /* ─── Sample text ─── */
