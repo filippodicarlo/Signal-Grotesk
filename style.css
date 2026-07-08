@@ -238,7 +238,6 @@ strong {
   color: var(--white);
   text-align: justify;
   line-height: 1.5;
-  letter-spacing: 0.05em;
 }
 
 
@@ -289,7 +288,6 @@ strong {
   font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   margin-bottom: 2vw;
-  letter-spacing: 0.05em;
 }
 
 .sample-text {
@@ -335,7 +333,6 @@ strong {
   font-variation-settings: 'wght' 400, 'XHGT' 450;
   color: var(--white);
   margin-bottom: 2vw;
-  letter-spacing: 0.05em;
 }
 
 .download-desc {
