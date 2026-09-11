@@ -4,7 +4,7 @@ const WGHT_MAX = 700;
 const XHGT_MIN = 400;
 const XHGT_MAX = 600;
 
-// Elementi DOM
+
 const hero       = document.getElementById('hero');
 const heroTitle  = document.getElementById('heroTitle');
 const wghtVal    = document.getElementById('wghtVal');
